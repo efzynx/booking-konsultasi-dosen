@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Penambahan: usesCleartextTraffic diperlukan jika server Anda belum menggunakan HTTPS. -->
+    <!-- Ini mengizinkan aplikasi untuk berkomunikasi dengan API melalui HTTP. -->
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BookingKonsultasiApp"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <!-- PERUBAHAN: LoginActivity sekarang adalah layar pertama (LAUNCHER) -->
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- PERUBAHAN: MainActivity tidak lagi menjadi LAUNCHER -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+
+        <!-- PENAMBAHAN: Mendaftarkan RegisterActivity -->
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="false" />
+
+        <!-- PENAMBAHAN: Mendaftarkan AddBookingActivity -->
+        <activity
+            android:name=".ui.add.AddBookingActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
