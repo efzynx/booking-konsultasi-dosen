@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Penambahan: usesCleartextTraffic diperlukan jika server Anda belum menggunakan HTTPS. -->
-    <!-- Ini mengizinkan aplikasi untuk berkomunikasi dengan API melalui HTTP. -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -42,6 +40,15 @@
         <!-- PENAMBAHAN: Mendaftarkan AddBookingActivity -->
         <activity
             android:name=".ui.add.AddBookingActivity"
+            android:exported="false" />
+
+        <!-- PENAMBAHAN: Mendaftarkan ProfileActivity -->
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.detail.BookingDetailActivity"
             android:exported="false" />
 
     </application>

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Booking Konsultasi App</string>
+    <string name="title_edit_jadwal">Edit Jadwal Konsultasi</string>
+    <string name="action_save_changes">Simpan Perubahan</string>
+    <string name="title_create_jadwal">Buat Jadwal Baru</string>
+    <string name="action_create_jadwal">Buat Jadwal</string>
+    <string name="user_greeting">Hi %1$s, %2$s</string>
+    <string name="text_empty_state">Belum ada jadwal konsultasi</string>
+    <string name="desc_empty_state_icon">Ikon kalender kosong</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_pending">Pending</string>
+    <string name="filter_approved">Approved</string>
+    <string name="filter_rejected">Rejected</string>
 </resources>

@@ -1,7 +1,10 @@
 package com.fauzan.zainullah.bookingkonsultasiapp.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Booking(
     @SerializedName("id")
     val id: Int,
@@ -21,4 +24,4 @@ data class Booking(
     val topikKonsultasi: String,
     @SerializedName("status")
     val status: String
-)
+) : Parcelable

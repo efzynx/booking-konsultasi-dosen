@@ -22,10 +22,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inisialisasi SessionManager
         SessionManager.init(this)
-
-        // PENAMBAHAN: Cek sesi sebelum menampilkan layout
         checkSession()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -36,7 +33,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkSession() {
-        if (SessionManager.isLoggedIn()) {
+        // PERBAIKAN: Menggunakan getToken() untuk mengecek sesi
+        if (SessionManager.getToken() != null) {
             navigateToMain()
         }
     }
@@ -67,11 +65,14 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(this, "Login Berhasil!", Toast.LENGTH_SHORT).show()
 
-                    // PENAMBAHAN: Simpan sesi pengguna
-                    val user = resource.data?.data
-                    SessionManager.saveSession(true, user)
-
-                    navigateToMain()
+                    // PERBAIKAN: Menggunakan saveAuth() dengan token dan user
+                    val loginData = resource.data?.data
+                    if (loginData != null) {
+                        SessionManager.saveAuth(loginData.accessToken, loginData.user)
+                        navigateToMain()
+                    } else {
+                        Toast.makeText(this, "Gagal mendapatkan data sesi.", Toast.LENGTH_LONG).show()
+                    }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -85,6 +86,6 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Tutup LoginActivity agar tidak bisa kembali
+        finish()
     }
 }

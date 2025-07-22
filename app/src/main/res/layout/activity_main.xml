@@ -6,28 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
+    <!-- AppBarLayout dan Toolbar sebagai header utama -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Jadwal Konsultasi"
+            app:titleTextColor="?attr/colorOnPrimary"/>
+        <!-- PERBAIKAN: Menambahkan background dan warna teks dinamis -->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- TextView untuk sapaan pengguna -->
     <TextView
-        android:id="@+id/tv_main_title"
+        android:id="@+id/tv_user_greeting"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Jadwal Konsultasi"
-        android:textSize="24sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+        tools:text="Hi Mahasiswa, Fauzan"
+        tools:visibility="visible" />
 
+    <!-- PENAMBAHAN: Filter Chips untuk Dosen -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:visibility="gone"
+        app:singleSelection="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_greeting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_all"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_all"
+            android:checked="true"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_pending"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_pending"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_approved"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_approved"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_rejected"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_rejected"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- PERUBAHAN: RecyclerView sekarang terikat di bawah ChipGroup -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_bookings"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_title"
+        app:layout_constraintTop_toBottomOf="@id/chip_group_filter"
         tools:listitem="@layout/item_booking" />
+
+    <!-- PENAMBAHAN: Layout untuk Empty State -->
+    <LinearLayout
+        android:id="@+id/layout_empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_empty_calendar"
+            app:tint="?android:attr/textColorSecondary"
+            android:contentDescription="@string/desc_empty_state_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_empty_state"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"

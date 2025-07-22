@@ -1,4 +1,3 @@
-// file: ui/add/AddBookingViewModel.kt
 package com.fauzan.zainullah.bookingkonsultasiapp.ui.add
 
 import androidx.lifecycle.LiveData
@@ -6,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fauzan.zainullah.bookingkonsultasiapp.data.model.AddBookingRequest
+import com.fauzan.zainullah.bookingkonsultasiapp.data.model.Booking
 import com.fauzan.zainullah.bookingkonsultasiapp.data.model.Dosen
 import com.fauzan.zainullah.bookingkonsultasiapp.data.model.GenericResponse
 import com.fauzan.zainullah.bookingkonsultasiapp.data.repository.BookingRepository
@@ -22,12 +22,17 @@ class AddBookingViewModel : ViewModel() {
     private val _dosenList = MutableLiveData<Resource<List<Dosen>>>()
     val dosenList: LiveData<Resource<List<Dosen>>> = _dosenList
 
-    // LiveData untuk hasil simpan booking
+    // PERBAIKAN: LiveData dipisah kembali sesuai fungsinya
+    // LiveData untuk hasil simpan booking baru
     private val _createBookingResult = MutableLiveData<Resource<GenericResponse<Any>>>()
     val createBookingResult: LiveData<Resource<GenericResponse<Any>>> = _createBookingResult
 
+    // LiveData untuk hasil update booking
+    private val _updateBookingResult = MutableLiveData<Resource<GenericResponse<Booking>>>()
+    val updateBookingResult: LiveData<Resource<GenericResponse<Booking>>> = _updateBookingResult
+
     init {
-        fetchDosenList() // Langsung ambil daftar dosen saat ViewModel dibuat
+        fetchDosenList()
     }
 
     private fun fetchDosenList() {
@@ -58,6 +63,22 @@ class AddBookingViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 _createBookingResult.postValue(Resource.Error("Error jaringan: ${e.message}"))
+            }
+        }
+    }
+
+    fun updateBooking(bookingId: Int, dosenId: Int, tanggal: String, jam: String, topik: String) {
+        viewModelScope.launch {
+            _updateBookingResult.postValue(Resource.Loading())
+            try {
+                val response = bookingRepository.updateBookingDetails(bookingId, dosenId, tanggal, jam, topik)
+                if (response.isSuccessful && response.body() != null) {
+                    _updateBookingResult.postValue(Resource.Success(response.body()!!))
+                } else {
+                    _updateBookingResult.postValue(Resource.Error("Gagal memperbarui booking."))
+                }
+            } catch (e: Exception) {
+                _updateBookingResult.postValue(Resource.Error("Error jaringan: ${e.message}"))
             }
         }
     }
