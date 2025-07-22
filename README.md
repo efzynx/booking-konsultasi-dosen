@@ -1,6 +1,8 @@
 # Booking Konsultasi Dosen
 
-![Logo Aplikasi](https://i.ibb.co/tPqscJVF/Chat-GPT-Image-Jul-22-2025-09-41-48-PM-removebg-preview.png)
+<p align="center">
+  <img src="exampleImg/icon_consultation_booking.png" alt="Logo Aplikasi Cek Resi" width="250"/>
+</p>
 
 Aplikasi Android native yang dirancang untuk mempermudah proses penjadwalan konsultasi antara mahasiswa dan dosen. Aplikasi ini dibangun dengan arsitektur modern, UI yang bersih, dan backend yang tangguh untuk memastikan pengalaman pengguna yang lancar dan efisien.
 
