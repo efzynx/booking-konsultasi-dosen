@@ -53,7 +53,6 @@ class AddBookingActivity : AppCompatActivity() {
 
     private fun setupUI() {
         if (isEditMode) {
-            // PERBAIKAN: Menggunakan ID dari layout Anda (tv_add_title)
             binding.tvAddTitle.text = getString(R.string.title_edit_jadwal)
             binding.btnSave.text = getString(R.string.action_save_changes)
 

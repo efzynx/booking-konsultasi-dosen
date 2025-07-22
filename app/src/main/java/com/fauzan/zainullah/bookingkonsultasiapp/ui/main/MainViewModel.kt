@@ -73,16 +73,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Mereset LiveData updateResult kembali ke null agar event tidak terpicu berulang kali.
-     */
+
     fun resetUpdateResult() {
         _updateResult.value = null
     }
 
-    /**
-     * Mereset LiveData deleteResult kembali ke null agar event tidak terpicu berulang kali.
-     */
     fun resetDeleteResult() {
         _deleteResult.value = null
     }

@@ -11,4 +11,6 @@
     <string name="filter_pending">Pending</string>
     <string name="filter_approved">Approved</string>
     <string name="filter_rejected">Rejected</string>
+    <string name="delete_confirmation_instruction">Tindakan ini tidak dapat diurungkan. Untuk melanjutkan, silakan ketik <b>ya, hapus akun saya!</b> di bawah ini.</string>
+    <string name="toolbar_header_text"><b>Jadwal Konsultasi</b></string>
 </resources>

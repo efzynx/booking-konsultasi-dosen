@@ -22,7 +22,6 @@ class AddBookingViewModel : ViewModel() {
     private val _dosenList = MutableLiveData<Resource<List<Dosen>>>()
     val dosenList: LiveData<Resource<List<Dosen>>> = _dosenList
 
-    // PERBAIKAN: LiveData dipisah kembali sesuai fungsinya
     // LiveData untuk hasil simpan booking baru
     private val _createBookingResult = MutableLiveData<Resource<GenericResponse<Any>>>()
     val createBookingResult: LiveData<Resource<GenericResponse<Any>>> = _createBookingResult

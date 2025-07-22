@@ -7,13 +7,6 @@ import com.fauzan.zainullah.bookingkonsultasiapp.R
 import com.fauzan.zainullah.bookingkonsultasiapp.data.model.Booking
 import com.fauzan.zainullah.bookingkonsultasiapp.databinding.ItemBookingBinding
 
-/**
- * Adapter untuk menampilkan daftar booking.
- *
- * @param bookings List awal dari data booking.
- * @param onItemClick Lambda function yang akan dipanggil ketika sebuah item di-klik.
- * Ini akan mengirimkan objek Booking dari item yang di-klik.
- */
 class BookingAdapter(
     private val bookings: MutableList<Booking>,
     private val onItemClick: (Booking) -> Unit,
@@ -65,7 +58,6 @@ class BookingAdapter(
             binding.tvDate.text = "${booking.tanggal} - ${booking.jam}"
             binding.tvStatus.text = booking.status.replaceFirstChar { it.uppercase() }
 
-            // PENAMBAHAN: Logika untuk mengubah warna background status
             val statusBackground = when (booking.status.lowercase()) {
                 "approved" -> R.drawable.bg_status_approved
                 "rejected" -> R.drawable.bg_status_rejected

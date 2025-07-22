@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Warna background utama -->
-    <item android:drawable="@color/dark_green" />
+    <!-- Warna background utama, diambil dari tema -->
+    <item android:drawable="?attr/headerColor" />
 
-    <!-- Bentuk gelombang kustom -->
-    <item>
-        <shape android:shape="rectangle">
-            <!-- Path data ini menciptakan kurva -->
-            <path
-                android:fillColor="@color/off_white"
-                android:pathData="M0,200 Q100,250 200,200 T400,200 V400 H0 Z" />
-        </shape>
-    </item>
-
-    <!-- Versi yang lebih sederhana menggunakan oval -->
+    <!-- Bentuk gelombang (oval) dengan warna background utama dari tema -->
     <item
-        android:bottom="0dp"
+        android:bottom="-60dp"
         android:left="-100dp"
         android:right="-100dp"
         android:top="150dp">
         <shape android:shape="oval">
-            <solid android:color="@color/off_white" />
+            <solid android:color="?attr/mainBackgroundColor" />
         </shape>
     </item>
 </layer-list>

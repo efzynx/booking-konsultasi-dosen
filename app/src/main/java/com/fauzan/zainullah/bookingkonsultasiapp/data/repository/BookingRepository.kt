@@ -18,10 +18,6 @@ class BookingRepository {
         val request = UpdateStatusRequest(status = status)
         return RetrofitClient.instance.updateBooking(bookingId, request)
     }
-    // --- TAMBAHKAN FUNGSI BARU DI BAWAH INI ---
-    /**
-     * Mengirim permintaan untuk mengubah detail booking.
-     */
     suspend fun updateBookingDetails(
         bookingId: Int,
         dosenId: Int,

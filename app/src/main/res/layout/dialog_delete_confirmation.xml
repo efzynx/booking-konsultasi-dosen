@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Tindakan ini tidak dapat diurungkan. Untuk melanjutkan, silakan ketik 'ya, hapus akun saya!' di bawah ini." />
+        android:text="@string/delete_confirmation_instruction" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

@@ -4,7 +4,6 @@ package com.fauzan.zainullah.bookingkonsultasiapp.ui.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -40,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
             val username = binding.etUsernameProfile.text.toString().trim()
             val password = binding.etPasswordProfile.text.toString()
 
-            // PERBAIKAN: Request ini sekarang tidak lagi membutuhkan 'nim'
+
             val request = UpdateProfileRequest(
                 nama = nama.ifEmpty { null },
                 username = username.ifEmpty { null },
@@ -61,7 +60,6 @@ class ProfileActivity : AppCompatActivity() {
                 is Resource.Loading -> { /* Tampilkan loading */ }
                 is Resource.Success -> {
                     resource.data?.let { user ->
-                        // PERBAIKAN: 'user.nim' sekarang akan dikenali
                         binding.tvNimValue.text = user.nim ?: "N/A"
                         binding.etNamaProfile.setText(user.nama)
                         binding.etUsernameProfile.setText(user.username)
@@ -112,7 +110,7 @@ class ProfileActivity : AppCompatActivity() {
         val confirmationEditText = dialogView.findViewById<EditText>(R.id.et_delete_confirmation)
         val confirmationText = "ya, hapus akun saya!"
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.App_Dialog_Alert)
             .setView(dialogView)
             .setTitle("Konfirmasi Hapus Akun")
             .setPositiveButton("Hapus", null) // Set null dulu agar dialog tidak langsung tertutup

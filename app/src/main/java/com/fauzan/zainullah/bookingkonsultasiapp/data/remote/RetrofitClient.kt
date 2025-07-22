@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-//    private const val BASE_URL = "https://api.namida.my.id/"
-    private const val BASE_URL = "http://192.168.1.5:5000/"
+    private const val BASE_URL = "https://api.namida.my.id/"
+//    private const val BASE_URL = "http://192.168.1.5:5000/"
 
 
     private val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

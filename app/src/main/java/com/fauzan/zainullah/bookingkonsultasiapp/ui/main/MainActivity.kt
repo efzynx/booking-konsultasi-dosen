@@ -29,10 +29,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var bookingAdapter: BookingAdapter
-    // PENAMBAHAN: Variabel untuk menyimpan daftar asli
     private var masterBookingList: List<Booking> = listOf()
-
-    // PENAMBAHAN: Launcher untuk menerima hasil dari BookingDetailActivity
+    // Launcher untuk menerima hasil dari BookingDetailActivity
     private val detailResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -42,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             val newStatus = data?.getStringExtra("NEW_STATUS")
 
             if (bookingId != -1 && newStatus != null) {
-                // Panggil fungsi update di ViewModel
                 viewModel.updateBookingStatus(bookingId!!, newStatus)
             }
         }
@@ -72,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddBookingActivity::class.java))
         }
 
-        // PENAMBAHAN: Listener untuk ChipGroup
+        // Listener untuk ChipGroup
         binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
             if (checkedIds.isEmpty()) {
                 binding.chipAll.isChecked = true
@@ -82,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             val selectedStatus = when (checkedIds.first()) {
                 R.id.chip_pending -> "pending"
                 R.id.chip_approved -> "approved"
-                R.id.chip_rejected -> "rejected" // atau "declined"
+                R.id.chip_rejected -> "rejected"
                 else -> "all"
             }
             filterBookingsByStatus(selectedStatus)
@@ -105,24 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun setupObservers() {
-//        viewModel.bookingResult.observe(this, Observer { resource ->
-//            when (resource) {
-//                is Resource.Loading -> {
-//                    binding.progressBarMain.visibility = View.VISIBLE
-//                }
-//                is Resource.Success -> {
-//                    binding.progressBarMain.visibility = View.GONE
-//                    resource.data?.data?.let { bookings ->
-//                        bookingAdapter.updateData(bookings)
-//                    }
-//                }
-//                is Resource.Error -> {
-//                    binding.progressBarMain.visibility = View.GONE
-//                    Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        })
     private fun setupObservers() {
         viewModel.bookingResult.observe(this, Observer { resource ->
             when (resource) {
@@ -201,7 +180,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // PENAMBAHAN: Fungsi baru untuk memfilter daftar
     private fun filterBookingsByStatus(status: String) {
         val filteredList = if (status == "all") {
             masterBookingList
@@ -211,7 +189,6 @@ class MainActivity : AppCompatActivity() {
 
         bookingAdapter.updateData(filteredList)
 
-        // Perbarui juga tampilan empty state berdasarkan hasil filter
         if (filteredList.isEmpty()) {
             binding.rvBookings.visibility = View.GONE
             binding.layoutEmptyState.visibility = View.VISIBLE
@@ -222,7 +199,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // PERUBAHAN: Mengganti nama fungsi dan menambahkan logika untuk filter
     private fun setupRoleSpecificUI() {
         val userRole = SessionManager.getUserData()?.role
         if (userRole == "dosen") {
@@ -243,7 +219,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirmationDialog(booking: Booking) {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.App_Dialog_Alert)
             .setTitle("Hapus Jadwal")
             .setMessage("Apakah Anda yakin ingin menghapus jadwal konsultasi ini?")
             .setPositiveButton("Hapus") { dialog, _ ->
@@ -333,8 +309,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDosenActionDialog(booking: Booking) {
-        val options = arrayOf("Approve", "Decline")
-        AlertDialog.Builder(this)
+        val options = arrayOf("Setujui", "Tolak")
+        AlertDialog.Builder(this, R.style.App_Dialog_Alert)
             .setTitle("Pilih Tindakan")
             .setItems(options) { dialog, which ->
                 val newStatus = if (which == 0) "approved" else "rejected"

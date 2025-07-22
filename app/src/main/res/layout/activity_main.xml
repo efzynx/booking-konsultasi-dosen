@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Jadwal Konsultasi"
+            app:title="@string/toolbar_header_text"
             app:titleTextColor="?attr/colorOnPrimary"/>
         <!-- PERBAIKAN: Menambahkan background dan warna teks dinamis -->
 

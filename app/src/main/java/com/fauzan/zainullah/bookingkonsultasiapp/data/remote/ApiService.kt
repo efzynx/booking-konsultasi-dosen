@@ -24,18 +24,23 @@ interface ApiService {
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): Response<GenericResponse<LoginResponse>>
+
     @POST("register")
     suspend fun register(
         @Body registerRequest: RegisterRequest
     ): Response<GenericResponse<Any>>
+
     @GET("dosen")
     suspend fun getAllDosen(): Response<GenericResponse<List<Dosen>>>
+
     @GET("booking")
     suspend fun getAllBookings(): Response<GenericResponse<List<Booking>>>
+
     @POST("booking")
     suspend fun createBooking(
         @Body addBookingRequest: AddBookingRequest
     ): Response<GenericResponse<Any>>
+
     @GET("profile")
     suspend fun getProfile(): Response<GenericResponse<User>>
 
@@ -44,17 +49,19 @@ interface ApiService {
 
     @DELETE("profile")
     suspend fun deleteProfile(): Response<GenericResponse<Any>>
+
     @PUT("booking/{id}")
     suspend fun updateBooking(
         @Path("id") bookingId: Int,
         @Body request: UpdateStatusRequest
     ): Response<GenericResponse<Booking>>
-    // Fungsi ini untuk Mahasiswa (mengubah detail jadwal)
+
     @PUT("booking/{id}")
     suspend fun updateBookingDetails(
         @Path("id") bookingId: Int,
         @Body request: UpdateBookingRequest // Menggunakan model request yang baru
     ): Response<GenericResponse<Booking>>
+
     @DELETE("booking/{id}")
     suspend fun deleteBooking(
         @Path("id") bookingId: Int

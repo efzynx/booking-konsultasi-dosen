@@ -3,11 +3,13 @@ package com.fauzan.zainullah.bookingkonsultasiapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.fauzan.zainullah.bookingkonsultasiapp.R
 import com.fauzan.zainullah.bookingkonsultasiapp.databinding.ActivityLoginBinding
 import com.fauzan.zainullah.bookingkonsultasiapp.ui.main.MainActivity
 import com.fauzan.zainullah.bookingkonsultasiapp.ui.register.RegisterActivity
@@ -18,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkSession() {
-        // PERBAIKAN: Menggunakan getToken() untuk mengecek sesi
+        // Menggunakan getToken() untuk mengecek sesi
         if (SessionManager.getToken() != null) {
             navigateToMain()
         }
@@ -50,22 +53,34 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        binding.ivPasswordToggleLogin.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                binding.etPassword.transformationMethod = null
+                binding.ivPasswordToggleLogin.setImageResource(R.drawable.ic_eye_visible)
+            } else {
+                binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.ivPasswordToggleLogin.setImageResource(R.drawable.ic_eye_invisible)
+            }
+            binding.etPassword.setSelection(binding.etPassword.text.length)
+        }
     }
 
     private fun setupObservers() {
         viewModel.loginResult.observe(this, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBarLogin.visibility = View.VISIBLE
                     binding.btnLogin.isEnabled = false
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBarLogin.visibility = View.GONE
                     binding.btnLogin.isEnabled = true
 
                     Toast.makeText(this, "Login Berhasil!", Toast.LENGTH_SHORT).show()
 
-                    // PERBAIKAN: Menggunakan saveAuth() dengan token dan user
+                    // Menggunakan saveAuth() dengan token dan user
                     val loginData = resource.data?.data
                     if (loginData != null) {
                         SessionManager.saveAuth(loginData.accessToken, loginData.user)
@@ -75,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBarLogin.visibility = View.GONE
                     binding.btnLogin.isEnabled = true
                     Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                 }
