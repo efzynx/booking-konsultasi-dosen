@@ -20,9 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="@string/toolbar_header_text"
-            app:titleTextColor="?attr/colorOnPrimary"/>
-        <!-- PERBAIKAN: Menambahkan background dan warna teks dinamis -->
+            android:theme="@style/App.ThemeOverlay.Toolbar"
+            app:popupTheme="@style/ThemeOverlay.Material3.Light"
+            app:title="@string/toolbar_header_text"/>
+        <!-- Menggunakan android:theme untuk memastikan warna ikon dan judul selalu kontras -->
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -44,7 +45,7 @@
         tools:text="Hi Mahasiswa, Fauzan"
         tools:visibility="visible" />
 
-    <!-- PENAMBAHAN: Filter Chips untuk Dosen -->
+    <!-- Filter Chips untuk Dosen -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_filter"
         android:layout_width="0dp"
@@ -88,7 +89,7 @@
 
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- PERUBAHAN: RecyclerView sekarang terikat di bawah ChipGroup -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_bookings"
         android:layout_width="0dp"
@@ -99,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@id/chip_group_filter"
         tools:listitem="@layout/item_booking" />
 
-    <!-- PENAMBAHAN: Layout untuk Empty State -->
+    <!-- Layout untuk Empty State -->
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="wrap_content"

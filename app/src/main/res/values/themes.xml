@@ -20,20 +20,27 @@
         <item name="secondaryTextColor">@color/text_secondary</item>
     </style>
 
-    <!-- PENAMBAHAN: Style baru untuk TextInputLayout transparan -->
+    <style name="Theme.BookingKonsultasiApp" parent="Base.Theme.BookingKonsultasiApp" />
+
+    <!-- Style untuk TextInputLayout agar terlihat seperti EditText biasa -->
     <style name="Widget.App.TextInputLayout.Underline" parent="Widget.Material3.TextInputLayout.FilledBox">
-        <!-- Membuat background transparan -->
         <item name="boxBackgroundColor">@android:color/transparent</item>
-        <!-- Menghilangkan garis kotak bawaan -->
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
-        <!-- Menonaktifkan hint yang melayang karena kita pakai TextView terpisah -->
         <item name="hintEnabled">false</item>
     </style>
 
+    <!-- Style dasar untuk Alert Dialog -->
     <style name="App.Dialog.Alert" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <!-- Properti umum bisa ditaruh di sini jika ada -->
     </style>
 
-    <style name="Theme.BookingKonsultasiApp" parent="Base.Theme.BookingKonsultasiApp" />
+    <!-- Tema mini (Overlay) yang Didedikasikan untuk Toolbar -->
+    <style name="App.ThemeOverlay.Toolbar" parent="">
+        <!-- Mengatur warna ikon (titik tiga, tombol kembali, dll.) menjadi warna kontras -->
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+        <!-- Mengatur warna teks judul menjadi warna kontras -->
+        <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+    </style>
+
 </resources>
